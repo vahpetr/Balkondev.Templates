@@ -1,0 +1,30 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>net7.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <GenerateDocumentationFile>true</GenerateDocumentationFile>
+    <NoWarn>$(NoWarn);1591</NoWarn>
+    <UserSecretsId>8c0ea1f4-212b-4dde-b2d4-742b36224206</UserSecretsId>
+  </PropertyGroup>
+
+  <PropertyGroup>
+    <ServerGarbageCollection>true</ServerGarbageCollection>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Grpc.AspNetCore" Version="2.51.0" />
+    <PackageReference Include="Grpc.AspNetCore.Server.Reflection" Version="2.51.0" />
+    <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="7.0.1" />
+    <PackageReference Include="Microsoft.AspNetCore.Grpc.JsonTranscoding" Version="7.0.1" />
+    <PackageReference Include="Microsoft.AspNetCore.Grpc.Swagger" Version="0.3.1" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\CompanyName.ServiceName.Protos\CompanyName.ServiceName.Protos.csproj" />
+    <ProjectReference Include="..\CompanyName.ServiceName.Ef.Postgres\CompanyName.ServiceName.Ef.Postgres.csproj" />
+    <ProjectReference Include="..\CompanyName.ServiceName.Shared\CompanyName.ServiceName.Shared.csproj" />
+  </ItemGroup>
+
+</Project>

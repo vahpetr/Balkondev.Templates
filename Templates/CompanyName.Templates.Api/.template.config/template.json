@@ -1,0 +1,250 @@
+{
+  "$schema": "http://json.schemastore.org/template",
+  "author": "vahpetr",
+  "classifications": [
+    "webapi",
+    "grpc",
+    "nunit",
+    "classlib",
+    "efcore",
+    "postgresql"
+  ],
+  "identity": "Balkondev.Templates.Api",
+  "groupIdentity": "Balkondev.Templates",
+  "name": "Balkondev API template",
+  "shortName": "balkondev",
+  "tags": {
+    "language": "C#",
+    "type": "project"
+  },
+  "symbols": {
+    "CompanyName": {
+      "type": "parameter",
+      "datatype": "text",
+      "description": "Company name",
+      "fileRename": "CompanyName",
+      "replaces": "CompanyName",
+      "isRequired": true,
+      "defaultValue": "MyCompany"
+    },
+    "COMPANYNAMEUPPER": {
+      "type": "generated",
+      "generator": "casing",
+      "fileRename": "COMPANYNAMEUPPER",
+      "parameters": {
+        "source": "CompanyName",
+        "toLower": false
+      },
+      "replaces": "COMPANYNAMEUPPER"
+    },
+    "companynamelower": {
+      "type": "generated",
+      "generator": "casing",
+      "fileRename": "companynamelower",
+      "parameters": {
+        "source": "CompanyName",
+        "toLower": true
+      },
+      "replaces": "companynamelower"
+    },
+    "ServiceName": {
+      "type": "parameter",
+      "datatype": "text",
+      "description": "Service name",
+      "fileRename": "ServiceName",
+      "replaces": "ServiceName",
+      "isRequired": true,
+      "defaultValue": "MyService"
+    },
+    "SERVICENAMEUPPER": {
+      "type": "generated",
+      "generator": "casing",
+      "fileRename": "SERVICENAMEUPPER",
+      "parameters": {
+        "source": "ServiceName",
+        "toLower": false
+      },
+      "replaces": "SERVICENAMEUPPER"
+    },
+    "servicenamelower": {
+      "type": "generated",
+      "generator": "casing",
+      "fileRename": "servicenamelower",
+      "parameters": {
+        "source": "ServiceName",
+        "toLower": true
+      },
+      "replaces": "servicenamelower"
+    },
+    "ApiName": {
+      "type": "parameter",
+      "datatype": "text",
+      "description": "Api name",
+      "fileRename": "ApiName",
+      "replaces": "ApiName",
+      "isRequired": true,
+      "defaultValue": "my-api"
+    },
+    "ResourceName": {
+      "type": "parameter",
+      "datatype": "text",
+      "description": "Resource name",
+      "fileRename": "ResourceName",
+      "replaces": "ResourceName",
+      "isRequired": true,
+      "defaultValue": "my-resource"
+    },
+    "EntityName": {
+      "type": "parameter",
+      "datatype": "text",
+      "description": "Entity name",
+      "fileRename": "EntityName",
+      "replaces": "EntityName",
+      "isRequired": true,
+      "defaultValue": "MyEntity"
+    },
+    "LocaleName": {
+      "type": "parameter",
+      "datatype": "text",
+      "description": "Locale name",
+      "fileRename": "LocaleName",
+      "replaces": "LocaleName",
+      "isRequired": true,
+      "defaultValue": "ru"
+    },
+    "localenamelower": {
+      "type": "generated",
+      "generator": "casing",
+      "fileRename": "localenamelower",
+      "parameters": {
+        "source": "LocaleName",
+        "toLower": true
+      },
+      "replaces": "localenamelower"
+    },
+    "DBA693F0-7F03-11ED-9398-0800200C9A66": {
+      "type": "generated",
+      "generator": "guid",
+      "replaces": "DBA693F0-7F03-11ED-9398-0800200C9A66",
+      "parameters": {
+        "defaultFormat": "D"
+      }
+    },
+    "B2D0C810-7F03-11ED-9398-0800200C9A66": {
+      "type": "generated",
+      "generator": "guid",
+      "replaces": "B2D0C810-7F03-11ED-9398-0800200C9A66",
+      "parameters": {
+        "defaultFormat": "D"
+      }
+    },
+    "EA811170-7F03-11ED-9398-0800200C9A66": {
+      "type": "generated",
+      "generator": "guid",
+      "replaces": "EA811170-7F03-11ED-9398-0800200C9A66",
+      "parameters": {
+        "defaultFormat": "D"
+      }
+    },
+    "F333A170-7F03-11ED-9398-0800200C9A66": {
+      "type": "generated",
+      "generator": "guid",
+      "replaces": "F333A170-7F03-11ED-9398-0800200C9A66",
+      "parameters": {
+        "defaultFormat": "D"
+      }
+    },
+    "3BD7F980-7F04-11ED-9398-0800200C9A66": {
+      "type": "generated",
+      "generator": "guid",
+      "replaces": "3BD7F980-7F04-11ED-9398-0800200C9A66",
+      "parameters": {
+        "defaultFormat": "D"
+      }
+    },
+    "032645B0-7F04-11ED-9398-0800200C9A66": {
+      "type": "generated",
+      "generator": "guid",
+      "replaces": "032645B0-7F04-11ED-9398-0800200C9A66",
+      "parameters": {
+        "defaultFormat": "D"
+      }
+    },
+    "09E5DF50-7F04-11ED-9398-0800200C9A66": {
+      "type": "generated",
+      "generator": "guid",
+      "replaces": "09E5DF50-7F04-11ED-9398-0800200C9A66",
+      "parameters": {
+        "defaultFormat": "D"
+      }
+    },
+    "130BCA90-7F04-11ED-9398-0800200C9A66": {
+      "type": "generated",
+      "generator": "guid",
+      "replaces": "130BCA90-7F04-11ED-9398-0800200C9A66",
+      "parameters": {
+        "defaultFormat": "D"
+      }
+    },
+    "4915B35A-06E9-4D5C-8CC4-853715CB6AD5": {
+      "type": "generated",
+      "generator": "guid",
+      "replaces": "4915B35A-06E9-4D5C-8CC4-853715CB6AD5",
+      "parameters": {
+        "defaultFormat": "D"
+      }
+    },
+    "10C190AF-4D25-44AE-AD54-0B3067425E55": {
+      "type": "generated",
+      "generator": "guid",
+      "replaces": "10C190AF-4D25-44AE-AD54-0B3067425E55",
+      "parameters": {
+        "defaultFormat": "D"
+      }
+    },
+    "268CC26E-0FC4-4FED-AAA4-DADA038DF40F": {
+      "type": "generated",
+      "generator": "guid",
+      "replaces": "268CC26E-0FC4-4FED-AAA4-DADA038DF40F",
+      "parameters": {
+        "defaultFormat": "D"
+      }
+    },
+    "721BD795-9A9D-4796-993A-FF552F956D03": {
+      "type": "generated",
+      "generator": "guid",
+      "replaces": "721BD795-9A9D-4796-993A-FF552F956D03",
+      "parameters": {
+        "defaultFormat": "D"
+      }
+    },
+    "B0AEA10B-7DD0-45A3-BE17-7F1E5BE03C39": {
+      "type": "generated",
+      "generator": "guid",
+      "replaces": "B0AEA10B-7DD0-45A3-BE17-7F1E5BE03C39",
+      "parameters": {
+        "defaultFormat": "D"
+      }
+    },
+    "5000": {
+      "type": "generated",
+      "generator": "port",
+      "parameters": {
+        "low": 10000,
+        "high": 20000,
+        "fallback": 5000
+      },
+      "replaces": "5000"
+    },
+    "5001": {
+      "type": "generated",
+      "generator": "port",
+      "parameters": {
+        "low": 10000,
+        "high": 20000,
+        "fallback": 5001
+      },
+      "replaces": "5001"
+    }
+  }
+}

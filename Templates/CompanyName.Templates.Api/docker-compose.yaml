@@ -1,0 +1,58 @@
+version: "3"
+
+services:
+  api:
+    build: .
+    image: companynamelower/servicenamelower_api
+    container_name: companynamelower_servicenamelower_api
+    mem_limit: 512m
+    mem_reservation: 128m
+    # cpus: 4
+    environment:
+      ASPNETCORE_ConnectionStrings__ServiceName: "Host=db;Port=5432;Username=postgres;Password=pass;Database=postgres"
+      # ASPNETCORE_ENVIRONMENT: "Production"
+    ports:
+      - 5000:5000
+      - 5001:5001
+    entrypoint: ["./CompanyName.ServiceName.Api"]
+    command:
+      [
+        "--migrate",
+        "--seed",
+        "--grpc",
+        "--grpc-reflection",
+        "--http",
+        "--http-swagger",
+      ]
+    stdin_open: true
+    tty: true
+    depends_on:
+      - db
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:5000/internal/status/http"]
+      interval: 30s
+      timeout: 20s
+      retries: 3
+
+  db:
+    build: ./postgres
+    # image: postgres:15.1-alpine3.17
+    image: companynamelower/servicenamelower_db
+    container_name: companynamelower_servicenamelower_db
+    mem_limit: 2048m
+    mem_reservation: 512m
+    # cpus: 4
+    environment:
+      POSTGRES_PASSWORD: pass
+      POSTGRES_USER: postgres
+      POSTGRES_DB: postgres
+    volumes:
+      - companynamelower_servicenamelower_db_data:/var/lib/postgresql/data
+      # - postgres/postgresql.conf:/etc/postgresql/postgresql.conf
+    ports:
+      - 5432:5432
+    restart: unless-stopped
+
+volumes:
+  companynamelower_servicenamelower_db_data:

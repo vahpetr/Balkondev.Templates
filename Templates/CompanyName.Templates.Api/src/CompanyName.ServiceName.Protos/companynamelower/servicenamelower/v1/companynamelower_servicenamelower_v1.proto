@@ -1,0 +1,203 @@
+/*
+   Service ServiceName
+*/
+syntax = "proto3";
+
+import "google/api/annotations.proto";
+import "google/api/field_behavior.proto";
+import "google/api/http.proto";
+import "google/protobuf/any.proto";
+import "google/protobuf/api.proto";
+import "google/protobuf/descriptor.proto";
+import "google/protobuf/duration.proto";
+import "google/protobuf/empty.proto";
+import "google/protobuf/field_mask.proto";
+import "google/protobuf/source_context.proto";
+import "google/protobuf/struct.proto";
+import "google/protobuf/timestamp.proto";
+import "google/protobuf/type.proto";
+import "google/protobuf/wrappers.proto";
+
+package companynamelower.servicenamelower.v1;
+
+option java_package = "localenamelower.companynamelower.servicenamelower.v1";
+option java_outer_classname = "CompanyNameServiceNameV1Proto";
+option java_multiple_files = false;
+option java_string_check_utf8 = true;
+option go_package = "/companynamelower_servicenamelower_v1";
+option cc_enable_arenas = true;
+option csharp_namespace = "CompanyName.ServiceName.V1";
+option objc_class_prefix = "COMPANYNAMEUPPERSERVICENAMEUPPERV1";
+option php_namespace = "CompanyName\\ServiceName\\V1";
+option ruby_package = "CompanyName::ServiceName::V1";
+option optimize_for = LITE_RUNTIME;
+
+// Сервис ServiceName
+service ServiceName {
+  // Метод сохранения EntityName.
+  // Поддерживает создание и обновление
+  rpc SaveEntityName(SaveEntityNameRequest) returns (SaveEntityNameResponse) {
+    option (google.api.http) = {
+      post: "/ApiName/api/v1/ResourceName"
+      body: "*"
+    };
+  }
+  // Метод получения EntityName
+  rpc GetEntityName(GetEntityNameRequest) returns (GetEntityNameResponse) {
+    option (google.api.http) = {
+      get: "/ApiName/api/v1/ResourceName/{id}"
+    };
+  }
+  // Метод получения списка EntityName
+  rpc GetEntityNameListStream(GetEntityNameListStreamRequest) returns (stream GetEntityNameListStreamResponse) {
+    option (google.api.http) = {
+      get: "/ApiName/api/v1/ResourceName/list"
+    };
+  }
+  // Метод получения количества EntityName
+  rpc GetEntityNameAmount(GetEntityNameAmountRequest) returns (GetEntityNameAmountResponse) {
+    option (google.api.http) = {
+      get: "/ApiName/api/v1/ResourceName/amount"
+    };
+  }
+  // Метод удаления EntityName
+  rpc DeleteEntityName(DeleteEntityNameRequest) returns (DeleteEntityNameResponse) {
+    option (google.api.http) = {
+      delete: "/ApiName/api/v1/ResourceName/{id}"
+    };
+  }
+}
+
+// Сущность EntityName
+message EntityName {
+  // Идентификатор
+  int32 id = 1 [(google.api.field_behavior) = OUTPUT_ONLY];
+  // Название
+  string title = 2 [(google.api.field_behavior) = REQUIRED];
+  // Описание
+  google.protobuf.StringValue description = 3;
+  // Контент
+  string content = 4 [(google.api.field_behavior) = REQUIRED];
+  // Дата создания
+  google.protobuf.Timestamp created_at = 5 [(google.api.field_behavior) = OUTPUT_ONLY];
+  // Дата изменения
+  google.protobuf.Timestamp changed_at = 6 [(google.api.field_behavior) = OUTPUT_ONLY];
+}
+// Фильтр EntityName
+message EntityNameFilter {
+  // По тексту
+  google.protobuf.StringValue q = 1;
+  // После даты создания.
+  // Дата больше или равна
+  google.protobuf.Timestamp after_created_at = 2;
+  // До даты создания.
+  // Дата меньше
+  google.protobuf.Timestamp before_created_at = 3;
+  // После даты изменеия.
+  // Дата больше или равна
+  google.protobuf.Timestamp after_changed_at = 4;
+  // До даты изменеия.
+  // Дата меньше
+  google.protobuf.Timestamp before_changed_at = 5;
+}
+// Курсор EntityName
+message EntityNameCursor {
+  // Уникальный веременой ключ
+  message UniqueTimeKey {
+    // Время
+    google.protobuf.Timestamp time = 1;
+    // Идентификатор
+    int32 id = 2;
+  }
+  // Cортировка по
+  message Sorting {
+    // Тип значения
+    oneof by {
+      // По идентификатору
+      int32 id = 1;
+      // Дата создания
+      UniqueTimeKey created_at = 2;
+      // Дата изменения
+      UniqueTimeKey changed_at = 3;
+      // По рангу совпадения с текстовым запросом.
+      // Значение должно быть равно q в фильтре
+      string rank = 4;
+    }
+  }
+  // Тип направления
+  oneof direction {
+    // Всё что больше (>) значения, сортировка ASC
+    Sorting after = 1;
+    // Всё что меньше (<) значения, сортировка DESC
+    Sorting before = 2;
+  }
+  // Лимит на получение записей.
+  // Default:20,Min:1,Max:1000
+  int32 limit = 3;
+}
+
+// Запрос сохранения EntityName
+message SaveEntityNameRequest {
+  // Объект EntityName
+  EntityName item = 1 [(google.api.field_behavior) = REQUIRED];
+}
+// Ответ на запрос сохранения EntityName
+message SaveEntityNameResponse {
+  // Справочник типов действий
+  enum ActionType {
+    // Не указано
+    ACTION_TYPE_UNKNOWN = 0;
+    // Добавлен
+    ACTION_TYPE_ADDED = 1;
+    // Обновлён
+    ACTION_TYPE_UPDATED = 2;
+  }
+  // Объект EntityName
+  EntityName item = 1 [(google.api.field_behavior) = REQUIRED];
+  // Тип действия
+  ActionType action_type = 2 [(google.api.field_behavior) = REQUIRED];
+}
+
+// Запрос получения EntityName
+message GetEntityNameRequest {
+  // Идентификатор
+  int32 id = 1 [(google.api.field_behavior) = REQUIRED];
+}
+// Ответ на запрос получения одного EntityName
+message GetEntityNameResponse {
+  // Объект EntityName
+  EntityName item = 1 [(google.api.field_behavior) = REQUIRED];
+}
+
+// Запрос получения списка EntityName
+message GetEntityNameListStreamRequest {
+  // Фильтр EntityName
+  EntityNameFilter filter = 1;
+  // Курсор EntityName
+  EntityNameCursor cursor = 2;
+}
+// Ответ на запрос получения списка EntityName
+message GetEntityNameListStreamResponse {
+  // Объект EntityName
+  EntityName item = 1 [(google.api.field_behavior) = REQUIRED];
+}
+
+// Запрос получения количества EntityName
+message GetEntityNameAmountRequest {
+  // Фильтр EntityName
+  EntityNameFilter filter = 1;
+}
+// Ответ на запрос получения количества EntityName
+message GetEntityNameAmountResponse {
+  // Количестов
+  int32 total = 1 [(google.api.field_behavior) = REQUIRED];
+}
+
+// Запрос удаления EntityName
+message DeleteEntityNameRequest {
+  // Идентификатор
+  int32 id = 1 [(google.api.field_behavior) = REQUIRED];
+}
+// Ответ на запрос удаления EntityName
+message DeleteEntityNameResponse {
+}
