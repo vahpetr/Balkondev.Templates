@@ -69,7 +69,18 @@ Console.WriteLine("Get first 5 add 2 updated with rank list:");
 var getFirst5UpdatedWithRankListRequest = new GetEntityNameListStreamRequest
 {
   Filter = new EntityNameFilter { Q = "Add 2 Updated" },
-  Cursor = new EntityNameCursor { Limit = 5, Before = new EntityNameCursor.Types.Sorting { Rank = "Add 2 Updated" } }
+  Cursor = new EntityNameCursor
+  {
+    Limit = 5,
+    Before = new EntityNameCursor.Types.Sorting
+    {
+      Rank = new EntityNameCursor.Types.UniqueStringKey
+      {
+        Value = "Add 2 Updated",
+        Id = 1
+      }
+    }
+  }
 };
 var getFirst5UpdatedWithRankListCall = client.GetEntityNameListStream(getFirst5UpdatedWithRankListRequest);
 await foreach (var res in getFirst5UpdatedWithRankListCall.ResponseStream.ReadAllAsync())
@@ -107,7 +118,7 @@ var getFirst5UpdatedAfterNowCreatedAtListRequest = new GetEntityNameListStreamRe
     Limit = 5,
     After = new EntityNameCursor.Types.Sorting
     {
-      CreatedAt = new EntityNameCursor.Types.UniqueTimeKey { Time = now, Id = 0 }
+      CreatedAt = new EntityNameCursor.Types.UniqueTimestampKey { Value = now, Id = 0 }
     }
   }
 };
@@ -126,7 +137,7 @@ var getFirst5UpdatedBeforeNowCreatedAtListRequest = new GetEntityNameListStreamR
     Limit = 5,
     After = new EntityNameCursor.Types.Sorting
     {
-      CreatedAt = new EntityNameCursor.Types.UniqueTimeKey { Time = now, Id = 0 }
+      CreatedAt = new EntityNameCursor.Types.UniqueTimestampKey { Value = now, Id = 0 }
     }
   }
 };

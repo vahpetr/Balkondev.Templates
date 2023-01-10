@@ -136,3 +136,4 @@ dotnet user-jwts create --scope "servicenamelower:full" --scope "servicenamelowe
 6. Add OpenTelemetry https://opentelemetry.io/docs/instrumentation/net/
 7. Add support NATS
 8. Add support Redis
+9. Add response caching

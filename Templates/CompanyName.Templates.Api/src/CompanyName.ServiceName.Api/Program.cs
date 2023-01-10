@@ -100,7 +100,8 @@ builder.Services.AddScoped<ServiceNameMigratorService>();
 builder.Services.AddScoped<IClaimsTransformation, UserClaimsTransformation>();
 builder.Services.AddScoped<IServiceNameContext, ServiceNameContext>(p => new ServiceNameContext
 {
-  Now = DateTimeOffset.UtcNow, Principal = p.GetService<ClaimsPrincipal>()
+  Now = DateTimeOffset.UtcNow,
+  Principal = p.GetService<ClaimsPrincipal>()
 });
 
 if (args.Contains("--grpc"))
@@ -131,11 +132,6 @@ if (args.Contains("--http"))
   {
     o.Level = CompressionLevel.Fastest;
   });
-  builder.Services.AddResponseCaching(o =>
-  {
-    o.MaximumBodySize = 256 * 1024; // 256kb
-    o.UseCaseSensitivePaths = false;
-  });
   builder.Services.Configure<Microsoft.AspNetCore.Http.Json.JsonOptions>(p => Configure(p.SerializerOptions));
 }
 
@@ -164,6 +160,8 @@ var app = builder.Build();
 
 app.UseAuthentication();
 app.UseAuthorization();
+app.UseForwardedHeaders();
+app.UseCors();
 
 if (args.Contains("--migrate"))
 {
@@ -189,8 +187,6 @@ if (args.Contains("--grpc-reflection"))
 
 if (args.Contains("--http"))
 {
-  app.UseForwardedHeaders();
-  app.UseCors();
   app.UseResponseCompression();
 
   app.MapGet("/", () => "ServiceName");

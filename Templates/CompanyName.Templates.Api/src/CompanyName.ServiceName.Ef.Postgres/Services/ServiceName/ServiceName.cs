@@ -317,21 +317,21 @@ public class ServiceName : V1.ServiceName.ServiceNameBase
           switch (after.ByCase)
           {
             case EntityNameCursor.Types.Sorting.ByOneofCase.Rank:
-              var rank = after.Rank.Trim();
-              query = query.OrderBy(p => EF.Functions
-                .ToTsVector("english", p.Title + " " + p.Description + " " + p.Content)
-                .RankCoverDensity(EF.Functions.WebSearchToTsQuery(rank),
-                  NpgsqlTsRankingNormalization.DivideByMeanHarmonicDistanceBetweenExtents)
-              ).ThenByDescending(p => p.Id);
-              break;
+              // var rank = after.Rank.Value.Trim();
+              // query = query.OrderBy(p => EF.Functions
+              //   .ToTsVector("english", p.Title + " " + p.Description + " " + p.Content)
+              //   .RankCoverDensity(EF.Functions.WebSearchToTsQuery(rank),
+              //     NpgsqlTsRankingNormalization.DivideByMeanHarmonicDistanceBetweenExtents)
+              // ).ThenBy(p => p.Id);
+              throw new NotImplementedException();
             case EntityNameCursor.Types.Sorting.ByOneofCase.ChangedAt:
-              query = query.OrderBy(p => p.ChangedAt).ThenByDescending(p => p.Id).Where(p =>
-                p.ChangedAt > after.ChangedAt.Time || (p.ChangedAt == after.ChangedAt.Time && p.Id < after.ChangedAt.Id)
+              query = query.OrderBy(p => p.ChangedAt).ThenBy(p => p.Id).Where(p =>
+                p.ChangedAt > after.ChangedAt.Value || (p.ChangedAt == after.ChangedAt.Value && p.Id > after.ChangedAt.Id)
               );
               break;
             case EntityNameCursor.Types.Sorting.ByOneofCase.CreatedAt:
-              query = query.OrderBy(p => p.CreatedAt).ThenByDescending(p => p.Id).Where(p =>
-                p.CreatedAt > after.CreatedAt.Time || (p.CreatedAt == after.CreatedAt.Time && p.Id < after.CreatedAt.Id)
+              query = query.OrderBy(p => p.CreatedAt).ThenBy(p => p.Id).Where(p =>
+                p.CreatedAt > after.CreatedAt.Value || (p.CreatedAt == after.CreatedAt.Value && p.Id > after.CreatedAt.Id)
               );
               break;
             case EntityNameCursor.Types.Sorting.ByOneofCase.None:
@@ -346,23 +346,23 @@ public class ServiceName : V1.ServiceName.ServiceNameBase
           switch (before.ByCase)
           {
             case EntityNameCursor.Types.Sorting.ByOneofCase.Rank:
-              var rank = before.Rank.Trim();
-              query = query.OrderByDescending(p => EF.Functions
-                .ToTsVector("english", p.Title + " " + p.Description + " " + p.Content)
-                .RankCoverDensity(EF.Functions.WebSearchToTsQuery(rank),
-                  NpgsqlTsRankingNormalization.DivideByMeanHarmonicDistanceBetweenExtents)
-              ).ThenByDescending(p => p.Id);
-              break;
+              // var rank = before.Rank.Value.Trim();
+              // query = query.OrderByDescending(p => EF.Functions
+              //   .ToTsVector("english", p.Title + " " + p.Description + " " + p.Content)
+              //   .RankCoverDensity(EF.Functions.WebSearchToTsQuery(rank),
+              //     NpgsqlTsRankingNormalization.DivideByMeanHarmonicDistanceBetweenExtents)
+              // ).ThenByDescending(p => p.Id);
+              throw new NotImplementedException();
             case EntityNameCursor.Types.Sorting.ByOneofCase.ChangedAt:
               query = query.OrderByDescending(p => p.ChangedAt).ThenByDescending(p => p.Id).Where(p =>
-                p.ChangedAt < before.ChangedAt.Time ||
-                (p.ChangedAt == before.ChangedAt.Time && p.Id < before.ChangedAt.Id)
+                p.ChangedAt < before.ChangedAt.Value ||
+                (p.ChangedAt == before.ChangedAt.Value && p.Id < before.ChangedAt.Id)
               );
               break;
             case EntityNameCursor.Types.Sorting.ByOneofCase.CreatedAt:
               query = query.OrderByDescending(p => p.CreatedAt).ThenByDescending(p => p.Id).Where(p =>
-                p.CreatedAt < before.CreatedAt.Time ||
-                (p.CreatedAt == before.CreatedAt.Time && p.Id < before.CreatedAt.Id)
+                p.CreatedAt < before.CreatedAt.Value ||
+                (p.CreatedAt == before.CreatedAt.Value && p.Id < before.CreatedAt.Id)
               );
               break;
             case EntityNameCursor.Types.Sorting.ByOneofCase.None:

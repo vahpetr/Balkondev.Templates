@@ -102,10 +102,17 @@ message EntityNameFilter {
 }
 // Курсор EntityName
 message EntityNameCursor {
-  // Уникальный веременой ключ
-  message UniqueTimeKey {
+  // Уникальный составной ключ по времени
+  message UniqueTimestampKey {
     // Время
-    google.protobuf.Timestamp time = 1;
+    google.protobuf.Timestamp value = 1;
+    // Идентификатор
+    int32 id = 2;
+  }
+  // Уникальный составной ключ по тексту
+  message UniqueStringKey {
+    // Текст
+    string value = 1;
     // Идентификатор
     int32 id = 2;
   }
@@ -116,12 +123,12 @@ message EntityNameCursor {
       // По идентификатору
       int32 id = 1;
       // Дата создания
-      UniqueTimeKey created_at = 2;
+      UniqueTimestampKey created_at = 2;
       // Дата изменения
-      UniqueTimeKey changed_at = 3;
+      UniqueTimestampKey changed_at = 3;
       // По рангу совпадения с текстовым запросом.
       // Значение должно быть равно q в фильтре
-      string rank = 4;
+      UniqueStringKey rank = 4;
     }
   }
   // Тип направления
